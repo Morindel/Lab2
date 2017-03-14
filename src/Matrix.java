@@ -1,10 +1,10 @@
-import java.util.Arrays;
 
 public class Matrix {
 
 	private final int sizex;
 	private final int sizey;
 	private double  array[][];
+	
 	public int getSizex() {
 		return sizex;
 	}
@@ -14,12 +14,16 @@ public class Matrix {
 	
 	public Matrix ( int sizey , int sizex)
 	{
+		if( sizey != sizex)
+			throw new IllegalArgumentException("To nie jest macierz kwadratowa");
 		 this.sizex = sizex;
 		 this.sizey = sizey;
 		 this.array = new double[sizey][sizex];
 	}
 	public Matrix ( double array[][])
 	{
+		if ( array.length != array[0].length)
+			throw new IllegalArgumentException("To nie jest macierz kwadratowa");
 		this.sizey = array.length;
 		this.sizex = array[0].length;
 	    this.array = new double[sizey][sizex];
@@ -31,12 +35,19 @@ public class Matrix {
 	
 	public void modifyElement (int y , int x , double value)
 	{
-		this.array[y][x] = value;
+		try
+		{
+		this.array[y-1][x-1] = value;
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			throw new IndexOutOfBoundsException("Nie poprawny numer indexu");
+		}
 	}
 	
 	public Matrix addMatrix (Matrix obj)
 	{
-		if(obj.sizex != sizex && obj.sizey != sizey)
+		if(obj.sizex != sizex || obj.sizey != sizey)
 			throw new IllegalArgumentException("Macierze nie sa rowne nie mozna ich dodac");
 		Matrix m = new Matrix(this.sizey,this.sizex);
 		 for (int i = 0; i < sizey; i++) {
@@ -52,6 +63,7 @@ public class Matrix {
 		
 		if(sizex != obj.getLength())
 			throw new IllegalArgumentException("Liczba wierszy macierzy musi rownac sie ilosci elementow wektora");
+		
 		Vector v = new Vector(obj.getLength());
 		for (int i = 0; i < sizey; i++) {
 			double result = 0 ;
@@ -64,13 +76,20 @@ public class Matrix {
 	}
 	public double getElement (int y , int x)
 	{
-		return this.array[y][x];
+		try
+		{
+		return this.array[y-1][x-1];
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			throw new IndexOutOfBoundsException("Nie poprawny numer indexu");
+		}
 	}
 
 	
 	public Matrix substractMatrix (Matrix obj)
 	{
-		if(obj.sizex != sizex && obj.sizey != sizey)
+		if(obj.sizex != sizex || obj.sizey != sizey)
 			throw new IllegalArgumentException("Macierze nie sa rowne nie mozna ich odjac");
 		Matrix m = new Matrix(this.sizey,this.sizex);
 		 for (int i = 0; i < sizey; i++) {

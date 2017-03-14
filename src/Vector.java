@@ -48,7 +48,15 @@ public class Vector {
 	}
 	public void modifyVector(int element,double value)
 	{
-		array[element] = value;
+
+		try
+		{
+			array[element] = value;
+		}
+		catch(ArrayIndexOutOfBoundsException e)
+		{
+			throw new ArrayIndexOutOfBoundsException("Po za indexem");
+		}
 	}
 	
 	public int getLength()
@@ -58,7 +66,14 @@ public class Vector {
 	
 	public double getElement(int element)
 	{
+		try
+		{
 		return array[element];
+		}
+		catch(ArrayIndexOutOfBoundsException e)
+		{
+			throw new ArrayIndexOutOfBoundsException("Po za indexem");
+		}
 	}
 	public double scalar(Vector obj)
 	{

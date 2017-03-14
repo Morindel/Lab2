@@ -3,7 +3,10 @@ public class Calculations {
 	public static void main(String args [])
 	{	
 		//Wektory
-		double [] x = {1.0,2.0,3.0,4.0};
+		double [] x = {1.0,2.0,3.0,4.0}; 
+		
+		double[][] m = {{10,10,10,10},{10,10,10,10},{10,10,10,10},{10,10,10,10}};
+		
 		Vector v1 = new Vector(x);
 		System.out.println("Wektor 1 powstaly przez skopiowanie utworzonej wczesniej tablicy (arraycopy) tablicy " + " \n" + v1);
 		
@@ -31,12 +34,13 @@ public class Calculations {
 		System.out.println("Drugi element Wektora 2 : " + v2.getElement(1));
 		
 		System.out.println("Iloczyn skalarny vektora 1 i 2 : " + v1.scalar(v2));
+		
 		//Macierze
-		Matrix m1 = new Matrix(4, 4);
+		Matrix m1 = new Matrix(4,4);
 		try
 		{
-		 for (int i = 0; i < m1.getSizex(); i++) {
-	        	for(int j = 0; j < m1.getSizey(); j++)
+		 for (int i = 1; i <= m1.getSizex(); i++) {
+	        	for(int j = 1; j <= m1.getSizey(); j++)
 	        	m1.modifyElement(i, j, 5);
 		 }
 		}
@@ -44,9 +48,9 @@ public class Calculations {
 		 {
 			 throw new ArrayIndexOutOfBoundsException("Wyszedles po za macierz ");
 		 }
+		
 		 System.out.println("Wypelnienie pustej macierzy 4x4 5-tkami" + "\n" + m1);
-		 
-		 double[][] m = {{10,10,10,10},{10,10,10,10},{10,10,10,10},{10,10,10,10}};
+	 
 		 Matrix m2 = new Matrix(m);
 		 System.out.println("Przekazanie utworzonej wczesniej tablicy do konstruktora" + "\n" + m2);
 		 
@@ -56,10 +60,10 @@ public class Calculations {
 		 Matrix m4 = m1.substractMatrix(m2);
 		 System.out.println("Macierz 1 - Macierz 2" + "\n" + m4);
 		 
-		 m1.modifyElement(1, 1, 3);
+		 m1.modifyElement(2, 2, 3);
 		 System.out.println("Ustawienie drugiego elementu x i y macierzy pierwszej na 3 zamiast 5" + "\n" + m1);
 		 
-		 System.out.println("Pobranie [2,3] elementu macierzy 2 : " + m2.getElement(1, 2) );
+		 System.out.println("Pobranie [2,2] elementu macierzy 1 : " + m1.getElement(2, 2) );
 		
 		 Vector v5 = m1.vectorMmatrix(v1);
 		 
